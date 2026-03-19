@@ -3,7 +3,11 @@ import java.util.Scanner;
 
 // Lớp đối tượng Bệnh nhân
 class Patient {
-    String id, name, gender, phone, address;
+    String id; 
+    String name;
+    String gender;
+    String phone;
+    String address;
     int age;
 
     public Patient(String id, String name, int age, String gender, String phone, String address) {
