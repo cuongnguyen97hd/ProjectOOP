@@ -21,7 +21,7 @@ class Patient {
 
     @Override
     public String toString() {
-        return String.format("ID: %s | Tên: %s | Tuổi: %d | GT: %s | SĐT: %s | Đ/C: %s", 
+        return String.format("ID: %s | Tên: %s | Tuổi: %d | GioiTinh: %s | SoDienThoai: %s | ĐiaChi: %s", 
                 id, name, age, gender, phone, address);
     }
 }
@@ -93,12 +93,15 @@ public class HospitalManagement {
         System.out.println("1. Thêm Admin | 2. Sửa Admin | 3. Xóa Admin | 4. Quay lại");
         int sub = Integer.parseInt(sc.nextLine());
         if (sub == 1) {
-            System.out.print("User mới: "); String u = sc.nextLine();
-            System.out.print("Pass mới: "); String p = sc.nextLine();
+            System.out.print("User mới: "); 
+            String u = sc.nextLine();
+            System.out.print("Pass mới: "); 
+            String p = sc.nextLine();
             adminList.add(new Admin(u, p));
             System.out.println("Đã thêm.");
         } else if (sub == 3) {
-            System.out.print("Nhập username cần xóa: "); String u = sc.nextLine();
+            System.out.print("Nhập username cần xóa: "); 
+            String u = sc.nextLine();
             adminList.removeIf(a -> a.username.equals(u));
             System.out.println("Đã xử lý.");
         }
@@ -106,15 +109,19 @@ public class HospitalManagement {
 
     // 3. Quản lý bệnh nhân
     static void managePatients() {
-        System.out.println("1. Thêm BN | 2. Xem DS | 3. Sửa BN | 4. Xóa BN");
+        System.out.println("1. Thêm BenhNhan| 2. Xem DanhSach | 3. Sửa BenhNhan | 4. Xóa BenhNhan");
         int sub = Integer.parseInt(sc.nextLine());
         
         switch (sub) {
             case 1 -> {
-                System.out.print("Mã BN: "); String id = sc.nextLine();
-                System.out.print("Tên: "); String name = sc.nextLine();
-                System.out.print("Tuổi: "); int age = Integer.parseInt(sc.nextLine());
-                System.out.print("SĐT: "); String phone = sc.nextLine();
+                System.out.print("Mã BenhNhan: "); 
+                String id = sc.nextLine();
+                System.out.print("Tên: "); 
+                String name = sc.nextLine();
+                System.out.print("Tuổi: ");     
+                int age = Integer.parseInt(sc.nextLine());
+                System.out.print("SoDienThoai: "); 
+                String phone = sc.nextLine();
                 patientList.add(new Patient(id, name, age, "Nam", phone, "Hà Nội"));
                 System.out.println("Đã thêm bệnh nhân.");
             }
@@ -123,7 +130,8 @@ public class HospitalManagement {
                 patientList.forEach(System.out::println);
             }
             case 4 -> {
-                System.out.print("Nhập mã BN cần xóa: "); String id = sc.nextLine();
+                System.out.print("Nhập mã BN cần xóa: "); 
+                String id = sc.nextLine();
                 patientList.removeIf(p -> p.id.equals(id));
                 System.out.println("Đã xóa.");
             }
