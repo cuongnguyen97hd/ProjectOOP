@@ -21,8 +21,7 @@ class Patient {
 
     @Override
     public String toString() {
-        return String.format("ID: %s | Tên: %s | Tuổi: %d | GioiTinh: %s | SoDienThoai: %s | ĐiaChi: %s", 
-                id, name, age, gender, phone, address);
+        return String.format("ID: %s | Tên: %s | Tuổi: %d | GioiTinh: %s | SoDienThoai: %s | ĐiaChi: %s", id, name, age, gender, phone, address);
     }
 }
 
