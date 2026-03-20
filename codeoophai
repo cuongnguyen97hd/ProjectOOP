@@ -55,7 +55,7 @@ public class HospitalManagement {
     }
 
     // 1. Xác thực đăng nhập
-    setatic void login() {
+    static void login() {
         System.out.println("\n--- ĐĂNG NHẬP HỆ THỐNG ---");
         System.out.print("Username: ");
         String user = sc.nextLine();
