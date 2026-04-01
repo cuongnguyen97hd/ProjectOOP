@@ -1,0 +1,151 @@
+import java.io.*;
+import java.util.*;
+
+public class AdminAccountManager {
+
+    private static final String FILE_NAME = "accounts.txt";
+
+    public static void menu() {
+        Scanner sc = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("\n===== QUAN LY TAI KHOAN ADMIN =====");
+            System.out.println("1 Them tai khoan");
+            System.out.println("2 Sua tai khoan");
+            System.out.println("3 Xoa tai khoan");
+            System.out.println("4 Danh sach tai khoan");
+            System.out.println("0 Quay lai");
+            System.out.print("Chon: ");
+
+            int choice;
+            try {            
+                choice = Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Vui long nhap mot so hop le!");
+                continue;   
+            }
+
+            if (choice == 1) {
+                addAccount(sc);
+            } else if (choice == 2) {
+                updateAccount(sc);
+            } else if (choice == 3) {
+                deleteAccount(sc);
+            } else if (choice == 4) {
+                listAccounts();
+            } else if (choice == 0) {
+                return;
+            } else {
+                System.out.println("Lua chon khong hop le!");
+            }
+        }
+    }
+
+    private static void addAccount(Scanner sc) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
+            System.out.print("Nhap username: ");
+            String username = sc.nextLine();
+
+            System.out.print("Nhap password: ");
+            String password = sc.nextLine();
+
+            System.out.print("Nhap vai tro (Admin/BacSi/LeTan): ");
+            String role = sc.nextLine();
+
+            bw.write(username + "," + password + "," + role);
+            bw.newLine();
+
+            System.out.println("Them thanh cong!");
+        } catch (IOException e) {
+            System.out.println("Loi ghi file!");
+        }
+    }
+
+    private static void updateAccount(Scanner sc) {
+        List<String> accounts = readAccounts();
+
+        System.out.print("Nhap username can sua: ");
+        String username = sc.nextLine();
+
+        boolean found = false;
+
+        for (int i = 0; i < accounts.size(); i++) {
+            String[] parts = accounts.get(i).split(",");
+            if (parts[0].equals(username)) {
+
+                System.out.print("Nhap password moi: ");
+                String newPass = sc.nextLine();
+
+                System.out.print("Nhap vai tro moi (Admin/BacSi/LeTan): ");
+                String newRole = sc.nextLine();
+
+                accounts.set(i, username + "," + newPass + "," + newRole);
+                found = true;
+                break;
+            }
+        }
+
+        if (found) {
+            writeAccounts(accounts);
+            System.out.println("Cap nhat thanh cong!");
+        } else {
+            System.out.println("Khong tim thay tai khoan!");
+        }
+    }
+
+    private static void deleteAccount(Scanner sc) {
+        List<String> accounts = readAccounts();
+
+        System.out.print("Nhap username can xoa: ");
+        String username = sc.nextLine();
+
+        boolean removed = accounts.removeIf(acc -> acc.split(",")[0].equals(username));
+
+        if (removed) {
+            writeAccounts(accounts);
+            System.out.println("Xoa thanh cong!");
+        } else {
+            System.out.println("Khong tim thay!");
+        }
+    }
+
+    private static void listAccounts() {
+        List<String> accounts = readAccounts();
+
+        System.out.println("===== DANH SACH TAI KHOAN =====");
+        for (String acc : accounts) {
+            String[] parts = acc.split(",");
+            if (parts.length == 3) {
+                System.out.println("Username: " + parts[0] 
+                    + " | Password: " + parts[1] 
+                    + " | Role: " + parts[2]);
+            }
+        }
+    }
+
+    private static List<String> readAccounts() {
+        List<String> list = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(FILE_NAME))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                list.add(line);
+            }
+        } catch (IOException e) {
+            // file chua ton tai
+        }
+
+        return list;
+    }
+
+    private static void writeAccounts(List<String> accounts) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_NAME))) {
+            for (String acc : accounts) {
+                bw.write(acc);
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Loi ghi file!");
+        }
+    }
+}
