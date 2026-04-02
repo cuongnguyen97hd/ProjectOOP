@@ -9,8 +9,7 @@ public class Employee {
     private String phone;
     private long basicSalary; // luong co ban neu lam du 26 ngay (VND)
 
-    public Employee(String id, String name, LocalDate startDate,
-                    String position, String phone, long basicSalary) {
+    public Employee(String id, String name, LocalDate startDate,String position, String phone, long basicSalary) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
@@ -20,17 +19,34 @@ public class Employee {
     }
 
     // getters / setters
-    public String getId() { return id; }
-    public String getName() { return name; }
-    public LocalDate getStartDate() { return startDate; }
-    public String getPosition() { return position; }
+    public String getId() { 
+        return id; 
+    }
+    public String getName() { 
+        return name;
+    }
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+    public String getPosition() { 
+        return position; 
+    }
     public String getPhone() { return phone; }
-    public long getBasicSalary() { return basicSalary; }
+    public long getBasicSalary() { 
+        return basicSalary; 
+    }
 
-    public void setName(String name) { this.name = name; }
-    public void setPosition(String position) { this.position = position; }
-    public void setPhone(String phone) { this.phone = phone; }
-    public void setBasicSalary(long basicSalary) { this.basicSalary = basicSalary; }
+    public void setName(String name) { 
+        this.name = name; 
+    }
+    public void setPosition(String position) { 
+        this.position = position; 
+    
+    this.phone = phone; 
+    }
+    public void setBasicSalary(long basicSalary) { 
+        this.basicSalary = basicSalary; 
+    }
 
     @Override
     public String toString() {
